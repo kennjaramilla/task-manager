@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,25 +28,25 @@ const routes: Array<RouteRecordRaw> = [
     name: 'NotFound',
     component: () => import('@/views/NotFound.vue')
   }
-];
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-});
+})
 
 // Navigation guards
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token');
-  const isAuthenticated = !!token;
+  const token = localStorage.getItem('token')
+  const isAuthenticated = !!token
   
   if (to.meta.requiresAuth && !isAuthenticated) {
-    next('/login');
+    next('/login')
   } else if (to.meta.requiresGuest && isAuthenticated) {
-    next('/dashboard');
+    next('/dashboard')
   } else {
-    next();
+    next()
   }
-});
+})
 
-export default router;
+export default router
