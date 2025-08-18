@@ -29,14 +29,15 @@ export class TaskController {
       .withMessage('Due date must be a valid date')
   ];
 
-  static async getTasks(req: AuthRequest, res: Response, next: NextFunction) {
+  static async getTasks(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       // Type assertion to ensure user exists (middleware guarantees this)
       if (!req.user) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: 'User not authenticated'
         });
+        return;
       }
 
       const filters = {
@@ -58,22 +59,24 @@ export class TaskController {
     }
   }
 
-  static async getTask(req: AuthRequest, res: Response, next: NextFunction) {
+  static async getTask(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: 'User not authenticated'
         });
+        return;
       }
 
       const task = await TaskService.getTask(req.params.id, req.user._id.toString());
       
       if (!task) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           message: 'Task not found'
         });
+        return;
       }
       
       res.status(200).json({
@@ -85,22 +88,24 @@ export class TaskController {
     }
   }
 
-  static async createTask(req: AuthRequest, res: Response, next: NextFunction) {
+  static async createTask(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           message: 'Validation failed',
           errors: errors.array()
         });
+        return;
       }
 
       if (!req.user) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: 'User not authenticated'
         });
+        return;
       }
 
       const taskData: CreateTaskRequest = req.body;
@@ -115,13 +120,14 @@ export class TaskController {
     }
   }
 
-  static async updateTask(req: AuthRequest, res: Response, next: NextFunction) {
+  static async updateTask(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: 'User not authenticated'
         });
+        return;
       }
 
       const updateData: UpdateTaskRequest = req.body;
@@ -132,10 +138,11 @@ export class TaskController {
       );
       
       if (!task) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           message: 'Task not found'
         });
+        return;
       }
       
       res.status(200).json({
@@ -147,22 +154,24 @@ export class TaskController {
     }
   }
 
-  static async deleteTask(req: AuthRequest, res: Response, next: NextFunction) {
+  static async deleteTask(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: 'User not authenticated'
         });
+        return;
       }
 
       const task = await TaskService.deleteTask(req.params.id, req.user._id.toString());
       
       if (!task) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           message: 'Task not found'
         });
+        return;
       }
       
       res.status(204).json({
@@ -174,13 +183,14 @@ export class TaskController {
     }
   }
 
-  static async reorderTasks(req: AuthRequest, res: Response, next: NextFunction) {
+  static async reorderTasks(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.user) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: 'User not authenticated'
         });
+        return;
       }
 
       const dragResult: DragDropResult = req.body;

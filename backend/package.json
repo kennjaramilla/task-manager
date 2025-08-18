@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon --exec ts-node src/server.ts",
+    "dev": "nodemon --exec \"ts-node -r tsconfig-paths/register src/server.ts\"",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -17,11 +17,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^4.17.23",
     "bcryptjs": "^3.0.2",
     "compression": "^1.8.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "express-rate-limit": "^8.0.1",
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
@@ -33,7 +34,6 @@
     "@types/compression": "^1.8.1",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
     "@types/express-rate-limit": "^6.0.2",
     "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
@@ -49,6 +49,7 @@
     "nodemon": "^3.1.10",
     "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   }

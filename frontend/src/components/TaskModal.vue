@@ -205,7 +205,7 @@ defineExpose({ resetForm });
 }
 
 .modal-content {
-  @apply bg-white rounded-lg shadow-xl max-w-md w-full max-h-90vh overflow-auto;
+  @apply bg-white rounded-lg shadow-xl max-w-md w-full max-h-screen overflow-auto;
 }
 
 .modal-header {

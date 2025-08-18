@@ -62,7 +62,7 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from "vue";
 import { useStore } from "vuex";
-import draggable from "vue-draggable-next";
+import draggable from 'vuedraggable'
 import { PlusIcon } from "@heroicons/vue/24/outline";
 import TaskCard from "./TaskCard.vue";
 import { Task, TaskStatus, DragDropResult } from "@shared/types";

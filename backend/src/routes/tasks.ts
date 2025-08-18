@@ -4,18 +4,17 @@ import { protect } from '../middleware/auth';
 
 const router = express.Router();
 
-// Protect all routes
+// Add protect middleware
 router.use(protect);
 
-router.route('/')
-  .get(TaskController.getTasks)
-  .post(TaskController.validateCreateTask, TaskController.createTask);
+// Protected routes with actual TaskController
+router.get('/', TaskController.getTasks);
+router.post('/', TaskController.createTask);
 
-router.route('/:id')
-  .get(TaskController.getTask)
-  .put(TaskController.updateTask)
-  .delete(TaskController.deleteTask);
-
+// Add other routes
+router.get('/:id', TaskController.getTask);
+router.put('/:id', TaskController.updateTask);
+router.delete('/:id', TaskController.deleteTask);
 router.put('/reorder', TaskController.reorderTasks);
 
 export default router;

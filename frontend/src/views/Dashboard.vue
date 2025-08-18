@@ -233,7 +233,7 @@ onMounted(async () => {
   // Clear messages after 5 seconds
   setTimeout(() => {
     store.dispatch(ActionType.CLEAR_MESSAGES);
-  }, 5000);
+  }, 3001);
 });
 
 // Methods
