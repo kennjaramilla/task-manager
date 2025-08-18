@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "^20.19.0 || >=22.12.0"
+    "node": ">=18.0.0"
   },
   "scripts": {
     "dev": "vite",
@@ -31,7 +31,9 @@
     "@testing-library/vue": "^8.1.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
-    "@vitejs/plugin-vue": "^6.0.1",
+    "@types/postcss-import": "^14.0.3",
+    "@types/postcss-load-config": "^3.0.1",
+    "@vitejs/plugin-vue": "^4.6.2",
     "@vitest/ui": "^3.2.4",
     "@vue/test-utils": "^2.4.0-alpha.2",
     "@vue/tsconfig": "^0.8.0",
@@ -39,9 +41,10 @@
     "jest": "^30.0.5",
     "jsdom": "^26.1.0",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.12",
-    "vite": "^7.0.6",
-    "vite-plugin-vue-devtools": "^8.0.0",
-    "vitest": "^3.2.4"
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.2",
+    "vite": "^4.5.14",
+    "vitest": "^3.2.4",
+    "vue-tsc": "^1.8.27"
   }
 }

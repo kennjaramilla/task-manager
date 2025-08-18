@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { 
-  AuthResponse, 
-  TaskResponse, 
+import {
+  AuthResponse,
+  TaskResponse,
   TasksResponse,
   LoginRequest,
   RegisterRequest,
@@ -13,7 +13,8 @@ import {
   Task
 } from '@shared/types';
 
-const API_URL = process.env.VITE_API_URL || 'http://localhost:5000/api';
+// Use import.meta.env for Vite instead of process.env
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 class ApiService {
   private api: AxiosInstance;
@@ -58,17 +59,17 @@ class ApiService {
 
   // Auth endpoints
   async login(credentials: LoginRequest): Promise<AuthResponse> {
-    const response = await this.api.post<AuthResponse>('/auth/login', credentials);
+    const response = await this.api.post('/auth/login', credentials);
     return response.data;
   }
 
   async register(userData: RegisterRequest): Promise<AuthResponse> {
-    const response = await this.api.post<AuthResponse>('/auth/register', userData);
+    const response = await this.api.post('/auth/register', userData);
     return response.data;
   }
 
   async getProfile(): Promise<AuthResponse> {
-    const response = await this.api.get<AuthResponse>('/auth/me');
+    const response = await this.api.get('/auth/me');
     return response.data;
   }
 
@@ -79,22 +80,22 @@ class ApiService {
     if (filters?.priority) params.append('priority', filters.priority);
     if (filters?.sort) params.append('sort', filters.sort);
 
-    const response = await this.api.get<TasksResponse>(`/tasks?${params}`);
+    const response = await this.api.get(`/tasks?${params}`);
     return response.data;
   }
 
   async getTask(id: string): Promise<TaskResponse> {
-    const response = await this.api.get<TaskResponse>(`/tasks/${id}`);
+    const response = await this.api.get(`/tasks/${id}`);
     return response.data;
   }
 
   async createTask(taskData: CreateTaskRequest): Promise<TaskResponse> {
-    const response = await this.api.post<TaskResponse>('/tasks', taskData);
+    const response = await this.api.post('/tasks', taskData);
     return response.data;
   }
 
   async updateTask(id: string, taskData: UpdateTaskRequest): Promise<TaskResponse> {
-    const response = await this.api.put<TaskResponse>(`/tasks/${id}`, taskData);
+    const response = await this.api.put(`/tasks/${id}`, taskData);
     return response.data;
   }
 

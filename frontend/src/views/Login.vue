@@ -35,6 +35,11 @@
           <span v-if="errors.password" class="error-message">{{ errors.password }}</span>
         </div>
 
+        <!-- Show global error from store -->
+        <div v-if="store.state.error" class="form-group">
+          <div class="error-message">{{ store.state.error }}</div>
+        </div>
+
         <button 
           type="submit" 
           class="auth-submit-btn"
@@ -57,10 +62,10 @@
 
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { LoginRequest } from '@shared/types';
 import { ActionType } from '@/store';
+import { useStore } from '@/composables/useStore';
 
 // Composables
 const store = useStore();
@@ -105,10 +110,14 @@ const handleLogin = async (): Promise<void> => {
   if (!validateForm()) return;
   
   try {
+    // Clear any previous errors
+    store.dispatch(ActionType.CLEAR_MESSAGES);
+    
     await store.dispatch(ActionType.LOGIN, form);
     router.push('/dashboard');
   } catch (error) {
     console.error('Login failed:', error);
+    // Error is already handled in the store action
   }
 };
 </script>
@@ -157,7 +166,7 @@ const handleLogin = async (): Promise<void> => {
 }
 
 .error-message {
-  @apply text-sm text-red-600;
+  @apply text-sm text-red-600 bg-red-50 border border-red-200 rounded p-2;
 }
 
 .auth-submit-btn {

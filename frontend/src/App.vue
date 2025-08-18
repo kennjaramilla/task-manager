@@ -1,11 +1,16 @@
-<script setup></script>
+<script setup lang="ts">
+// Any global app logic can go here
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div id="app">
+    <!-- This is where your routed components will be displayed -->
+    <RouterView />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#app {
+  min-height: 100vh;
+}
+</style>

@@ -1,3 +1,5 @@
+import { NavigationGuardNext } from 'vue-router'
+import { RouteLocationNormalized } from 'vue-router'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
@@ -36,7 +38,7 @@ const router = createRouter({
 })
 
 // Navigation guards
-router.beforeEach((to, from, next) => {
+router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   const token = localStorage.getItem('token')
   const isAuthenticated = !!token
   
