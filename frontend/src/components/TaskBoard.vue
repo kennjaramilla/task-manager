@@ -61,12 +61,12 @@
 
 <script setup lang="ts">
 import { computed, reactive, watch } from "vue";
-import { useStore } from "vuex";
 import draggable from 'vuedraggable'
 import { PlusIcon } from "@heroicons/vue/24/outline";
 import TaskCard from "./TaskCard.vue";
 import { Task, TaskStatus, DragDropResult } from "@shared/types";
 import { ActionType } from "@/store";
+import { useStore } from "@/composables/useStore";
 
 // Props & Emits
 interface Props {
@@ -84,7 +84,7 @@ const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 // Store
-const store = useStore();
+const store = useStore(); // Now properly typed
 const taskStats = computed(() => store.getters.taskStats);
 
 // Status configuration

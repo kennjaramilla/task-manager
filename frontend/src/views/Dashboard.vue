@@ -182,7 +182,6 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, reactive } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import {
   PlusIcon,
@@ -198,9 +197,10 @@ import TaskCard from '@/components/TaskCard.vue';
 import TaskModal from '@/components/TaskModal.vue';
 import { Task, TaskStatus, CreateTaskRequest, TaskFilters } from '@shared/types';
 import { ActionType } from '@/store';
+import { useStore } from '@/composables/useStore'; // Use the typed store composable
 
 // Composables
-const store = useStore();
+const store = useStore(); // This should now be properly typed
 const router = useRouter();
 
 // State

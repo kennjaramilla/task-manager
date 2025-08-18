@@ -85,7 +85,7 @@
 
 <script setup lang="ts">
 import { reactive, computed, ref } from 'vue';
-import { useStore } from 'vuex';
+import { useStore } from "@/composables/useStore";
 import { useRouter } from 'vue-router';
 import { RegisterRequest } from '@shared/types';
 import { ActionType } from '@/store';
